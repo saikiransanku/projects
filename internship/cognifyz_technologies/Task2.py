@@ -1,11 +1,10 @@
-
 import pandas as pd
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import joblib
 import os
-DATA_PATH = r"C:\Users\Admin\Documents\cognoz\Dataset .csv"
+DATA_PATH = r"C:\\Users\\kiran\\Documents\\GitHub\\projects\\internship\\cognifyz_technologies\\Dataset .csv"
 OUTPUT_DIR = "task2_outputs"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
