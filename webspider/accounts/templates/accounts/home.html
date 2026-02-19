@@ -1,0 +1,305 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        :root {
+            --page-bg: #eef2f6;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-soft: #475569;
+            --input-bg: #ffffff;
+            --input-border: #cbd5e1;
+            --accent: #2563eb;
+            --accent-hover: #1d4ed8;
+            --menu-border: #dbe4ee;
+            --avatar-bg: #dbeafe;
+            --avatar-text: #1e40af;
+        }
+        body.theme-dark {
+            --page-bg: #0f172a;
+            --card-bg: #111c31;
+            --text-main: #e2e8f0;
+            --text-soft: #9fb0c8;
+            --input-bg: #17243d;
+            --input-border: #2f4365;
+            --accent: #38bdf8;
+            --accent-hover: #22a4dd;
+            --menu-border: #2f4365;
+            --avatar-bg: #1e3a5f;
+            --avatar-text: #bcd9ff;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            background: var(--page-bg);
+            color: var(--text-main);
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .topbar {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 14px 24px;
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--menu-border);
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 180px;
+        }
+        .logo-mark {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        .logo-text {
+            font-size: 21px;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+        }
+        .search-wrap {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+        .search-form {
+            width: min(680px, 100%);
+        }
+        .search-input {
+            width: 100%;
+            padding: 11px 14px;
+            border: 1px solid var(--input-border);
+            border-radius: 10px;
+            background: var(--input-bg);
+            color: var(--text-main);
+            font-size: 15px;
+            outline: none;
+        }
+        .search-input:focus {
+            border-color: var(--accent);
+        }
+        .actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .theme-btn,
+        .settings-btn {
+            border: 1px solid var(--input-border);
+            border-radius: 10px;
+            background: var(--input-bg);
+            color: var(--text-main);
+            padding: 9px 12px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .profile-chip {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 5px 8px;
+            border-radius: 999px;
+            border: 1px solid var(--input-border);
+            background: var(--input-bg);
+        }
+        .avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--avatar-bg);
+            color: var(--avatar-text);
+            font-weight: 700;
+            font-size: 15px;
+            text-transform: uppercase;
+        }
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .settings {
+            position: relative;
+        }
+        .settings-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: calc(100% + 8px);
+            width: 280px;
+            background: var(--card-bg);
+            border: 1px solid var(--menu-border);
+            border-radius: 12px;
+            box-shadow: 0 14px 28px rgba(2, 8, 23, 0.18);
+            padding: 12px;
+            z-index: 30;
+        }
+        .settings.open .settings-menu {
+            display: block;
+        }
+        .menu-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px;
+            border-radius: 10px;
+            background: var(--input-bg);
+        }
+        .menu-name {
+            font-size: 14px;
+            font-weight: 700;
+        }
+        .menu-email {
+            font-size: 12px;
+            color: var(--text-soft);
+            margin-top: 2px;
+        }
+        .menu-link {
+            display: block;
+            margin-top: 12px;
+            width: 100%;
+            text-align: center;
+            background: var(--accent);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .menu-link:hover {
+            background: var(--accent-hover);
+        }
+        .content {
+            max-width: 980px;
+            margin: 40px auto;
+            padding: 0 24px;
+        }
+        .hero {
+            background: var(--card-bg);
+            border: 1px solid var(--menu-border);
+            border-radius: 16px;
+            padding: 30px;
+        }
+        .hero h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+        .hero p {
+            margin: 10px 0 0;
+            color: var(--text-soft);
+            font-size: 16px;
+        }
+        @media (max-width: 980px) {
+            .topbar {
+                flex-wrap: wrap;
+            }
+            .logo {
+                min-width: 0;
+            }
+            .search-wrap {
+                order: 3;
+                width: 100%;
+            }
+            .actions {
+                margin-left: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="topbar">
+        <div class="logo">
+            <img class="logo-mark" src="{% static 'accounts/ml_brain.jpg' %}" alt="Logo">
+            <div class="logo-text">WebMaster</div>
+        </div>
+        <div class="search-wrap">
+            <form class="search-form" method="get">
+                <input class="search-input" type="text" name="q" value="{{ request.GET.q|default:'' }}" placeholder="Search">
+            </form>
+        </div>
+        <div class="actions">
+            <button type="button" id="theme-toggle" class="theme-btn" aria-label="Toggle theme">Theme: Light</button>
+            <div class="profile-chip">
+                <div class="avatar">
+                    {% if request.user.profile_image %}
+                    <img src="{{ request.user.profile_image.url }}" alt="Profile">
+                    {% else %}
+                    {{ display_name|first }}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="settings" id="settings-wrap">
+                <button type="button" id="settings-toggle" class="settings-btn" aria-label="Settings">&#9881; Settings</button>
+                <div id="settings-menu" class="settings-menu">
+                    <div class="menu-profile">
+                        <div class="avatar">
+                            {% if request.user.profile_image %}
+                            <img src="{{ request.user.profile_image.url }}" alt="Profile">
+                            {% else %}
+                            {{ display_name|first }}
+                            {% endif %}
+                        </div>
+                        <div>
+                            <div class="menu-name">{{ display_name }}</div>
+                            <div class="menu-email">{{ request.user.email }}</div>
+                        </div>
+                    </div>
+                    <a class="menu-link" href="{% url 'profile' %}">Open Profile Settings</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="content">
+        <section class="hero">
+            <h1>Welcome, {{ display_name }}</h1>
+            <p>Use the settings button to open your profile and update your name or profile image.</p>
+        </section>
+    </main>
+
+    <script>
+    const THEME_KEY = 'auth_theme';
+    const body = document.body;
+    const themeToggle = document.getElementById('theme-toggle');
+    const settingsWrap = document.getElementById('settings-wrap');
+    const settingsToggle = document.getElementById('settings-toggle');
+
+    function setTheme(themeName) {
+        const isDark = themeName === 'dark';
+        body.classList.toggle('theme-dark', isDark);
+        themeToggle.textContent = isDark ? 'Theme: Dark' : 'Theme: Light';
+        localStorage.setItem(THEME_KEY, themeName);
+    }
+
+    themeToggle.addEventListener('click', function () {
+        const nextTheme = body.classList.contains('theme-dark') ? 'light' : 'dark';
+        setTheme(nextTheme);
+    });
+
+    settingsToggle.addEventListener('click', function () {
+        settingsWrap.classList.toggle('open');
+    });
+
+    document.addEventListener('click', function (event) {
+        if (!settingsWrap.contains(event.target)) {
+            settingsWrap.classList.remove('open');
+        }
+    });
+
+    setTheme(localStorage.getItem(THEME_KEY) || 'light');
+    </script>
+</body>
+</html>

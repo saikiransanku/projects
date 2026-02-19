@@ -5,8 +5,6 @@ from datetime import date, datetime
 import matplotlib
 matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt
-
-import matplotlib.pyplot as plt
 from openpyxl import Workbook
 from reportlab.pdfgen import canvas
 

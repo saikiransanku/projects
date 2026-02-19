@@ -1,0 +1,209 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        :root {
+            --page-bg: #f2f2f2;
+            --panel-bg: #f2f2f2;
+            --text-color: #111111;
+            --input-bg: #ffffff;
+            --input-border: #cfd4db;
+            --input-text: #111111;
+            --btn-bg: #007bff;
+            --btn-bg-hover: #0069d9;
+            --btn-text: #ffffff;
+            --link-color: #007bff;
+            --switch-bg: rgba(255, 255, 255, 0.9);
+            --switch-border: #d8dde4;
+            --switch-icon: #4b5563;
+            --switch-active-bg: #007bff;
+            --switch-active-icon: #ffffff;
+        }
+        body.theme-dark {
+            --page-bg: #141a23;
+            --panel-bg: #141a23;
+            --text-color: #e7edf7;
+            --input-bg: #1f2a3a;
+            --input-border: #334155;
+            --input-text: #e7edf7;
+            --btn-bg: #1d9bf0;
+            --btn-bg-hover: #1788d6;
+            --btn-text: #ffffff;
+            --link-color: #6ec1ff;
+            --switch-bg: rgba(25, 33, 46, 0.95);
+            --switch-border: #2e3a4e;
+            --switch-icon: #b8c7da;
+            --switch-active-bg: #1d9bf0;
+            --switch-active-icon: #ffffff;
+        }
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background: var(--page-bg);
+            color: var(--text-color);
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .theme-switch {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            z-index: 20;
+            display: flex;
+            gap: 8px;
+            padding: 6px;
+            border: 1px solid var(--switch-border);
+            border-radius: 999px;
+            background: var(--switch-bg);
+            backdrop-filter: blur(4px);
+        }
+        .theme-btn {
+            width: 38px;
+            height: 38px;
+            border: none;
+            border-radius: 50%;
+            background: transparent;
+            color: var(--switch-icon);
+            font-size: 18px;
+            line-height: 1;
+            cursor: pointer;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+        .theme-btn.active {
+            background: var(--switch-active-bg);
+            color: var(--switch-active-icon);
+        }
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+        .left {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: var(--panel-bg);
+            box-shadow: 2px 0 8px rgba(0,0,0,0.03);
+        }
+        .right {
+            flex: 1;
+            background: var(--panel-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .right img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+        }
+        .signup-form {
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .signup-form input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid var(--input-border);
+            border-radius: 6px;
+            background: var(--input-bg);
+            color: var(--input-text);
+        }
+        .signup-form button {
+            padding: 10px;
+            background: var(--btn-bg);
+            color: var(--btn-text);
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: background 0.2s ease;
+        }
+        .signup-form button:hover {
+            background: var(--btn-bg-hover);
+        }
+        .form-error {
+            color: #dc2626;
+            text-align: center;
+        }
+        .form-note {
+            text-align: center;
+            font-size: 14px;
+        }
+        .form-note a {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+        @media (max-width: 900px) {
+            .container {
+                flex-direction: column;
+            }
+            .right {
+                min-height: 280px;
+            }
+            .left, .right {
+                flex: initial;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="theme-switch" role="group" aria-label="Theme switch">
+        <button type="button" class="theme-btn" data-theme="light" title="Light theme" aria-label="Light theme">&#9728;</button>
+        <button type="button" class="theme-btn" data-theme="dark" title="Dark theme" aria-label="Dark theme">&#127769;</button>
+    </div>
+    <div class="container">
+        <div class="left">
+            <form class="signup-form" method="post" autocomplete="off">
+                {% csrf_token %}
+                <h2 style="text-align:center; margin-bottom:10px;">Sign Up</h2>
+                {% if error %}
+                <div class="form-error">{{ error }}</div>
+                {% endif %}
+                <input type="text" name="full_name" placeholder="Full Name" required autofocus>
+                <input type="email" name="gmail" placeholder="Gmail Address" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+                <button type="submit">Create Account</button>
+                <div class="form-note">
+                    Already have an account?
+                    <a href="{% url 'login' %}">Login</a>
+                </div>
+            </form>
+        </div>
+        <div class="right">
+            <img src="{% static 'accounts/ml_brain.jpg' %}" alt="Machine Learning Logo">
+        </div>
+    </div>
+    <script>
+    const THEME_KEY = 'auth_theme';
+    const themeButtons = document.querySelectorAll('.theme-btn');
+
+    function setTheme(themeName) {
+        const isDark = themeName === 'dark';
+        document.body.classList.toggle('theme-dark', isDark);
+        themeButtons.forEach(function (button) {
+            button.classList.toggle('active', button.dataset.theme === themeName);
+        });
+        localStorage.setItem(THEME_KEY, themeName);
+    }
+
+    themeButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            setTheme(button.dataset.theme);
+        });
+    });
+
+    setTheme(localStorage.getItem(THEME_KEY) || 'light');
+    </script>
+</body>
+</html>
