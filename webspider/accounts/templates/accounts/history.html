@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usage History</title>
+    <link rel="stylesheet" href="{% static 'accounts/css/theme.css' %}">
+    <link rel="stylesheet" href="{% static 'accounts/css/layout.css' %}">
+    <link rel="stylesheet" href="{% static 'accounts/css/history.css' %}">
+</head>
+<body class="theme-main">
+    <header class="topbar">
+        <div class="topbar-left">
+            <div class="hamburger-menu" id="hamburger-menu">
+                <button
+                    type="button"
+                    class="hamburger-toggle"
+                    id="hamburger-toggle"
+                    aria-label="Open menu"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                >
+                    &#9776;
+                </button>
+                <div class="hamburger-dropdown" id="hamburger-dropdown" role="menu" aria-label="Navigation menu">
+                    <a href="{% url 'home' %}" class="hamburger-item" role="menuitem">Home</a>
+                    <a href="{% url 'farmer_laws' %}" class="hamburger-item" role="menuitem">Farmers Laws</a>
+                </div>
+            </div>
+            <a href="{% url 'home' %}" class="logo">
+                <img src="{% static 'accounts/ml_brain.jpg' %}" alt="Logo">
+                <span>WebMaster</span>
+            </a>
+        </div>
+        <button type="button" id="theme-toggle" class="theme-btn" aria-label="Toggle theme">Theme: Light</button>
+    </header>
+
+    <main class="container page-container">
+        <section class="card">
+            <h1>History</h1>
+            <p class="subtitle">{{ display_name }}, this shows your previous usage.</p>
+            {% if history_entries %}
+            <div class="history-list">
+                {% for entry in history_entries %}
+                <article class="history-item">
+                    <div class="history-activity">{{ entry.activity }}</div>
+                    <div class="history-time">{{ entry.created_at|date:"d M Y, h:i A" }}</div>
+                </article>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="empty">No usage history yet.</div>
+            {% endif %}
+        </section>
+    </main>
+    <div id="google_translate_element"></div>
+
+        <script src="{% static 'accounts/js/history.js' %}"></script>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>
+

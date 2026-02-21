@@ -5,200 +5,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Settings</title>
-    <style>
-        :root {
-            --page-bg: #eef2f6;
-            --card-bg: #ffffff;
-            --text-main: #0f172a;
-            --text-soft: #475569;
-            --input-bg: #ffffff;
-            --input-border: #cbd5e1;
-            --accent: #2563eb;
-            --accent-hover: #1d4ed8;
-            --error: #dc2626;
-            --success: #166534;
-            --avatar-bg: #dbeafe;
-            --avatar-text: #1e40af;
-        }
-        body.theme-dark {
-            --page-bg: #0f172a;
-            --card-bg: #111c31;
-            --text-main: #e2e8f0;
-            --text-soft: #9fb0c8;
-            --input-bg: #17243d;
-            --input-border: #2f4365;
-            --accent: #38bdf8;
-            --accent-hover: #22a4dd;
-            --error: #f87171;
-            --success: #86efac;
-            --avatar-bg: #1e3a5f;
-            --avatar-text: #bcd9ff;
-        }
-        * {
-            box-sizing: border-box;
-        }
-        body {
-            margin: 0;
-            background: var(--page-bg);
-            color: var(--text-main);
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        }
-        .topbar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 24px;
-            background: var(--card-bg);
-            border-bottom: 1px solid var(--input-border);
-        }
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            color: inherit;
-            font-weight: 700;
-            font-size: 21px;
-        }
-        .logo img {
-            width: 38px;
-            height: 38px;
-            border-radius: 10px;
-            object-fit: cover;
-        }
-        .theme-btn {
-            border: 1px solid var(--input-border);
-            border-radius: 10px;
-            background: var(--input-bg);
-            color: var(--text-main);
-            padding: 9px 12px;
-            font-size: 14px;
-            cursor: pointer;
-        }
-        .container {
-            max-width: 760px;
-            margin: 36px auto;
-            padding: 0 20px;
-        }
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--input-border);
-            border-radius: 16px;
-            padding: 26px;
-        }
-        .card h1 {
-            margin: 0 0 20px;
-            font-size: 30px;
-        }
-        .current-user {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            margin-bottom: 22px;
-            padding: 12px;
-            border-radius: 12px;
-            background: var(--input-bg);
-            border: 1px solid var(--input-border);
-        }
-        .avatar {
-            width: 62px;
-            height: 62px;
-            border-radius: 50%;
-            overflow: hidden;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--avatar-bg);
-            color: var(--avatar-text);
-            font-size: 24px;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-        .avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .name {
-            font-size: 18px;
-            font-weight: 700;
-        }
-        .email {
-            margin-top: 4px;
-            font-size: 14px;
-            color: var(--text-soft);
-        }
-        .field {
-            display: block;
-            margin-bottom: 16px;
-        }
-        .field label {
-            display: block;
-            font-size: 14px;
-            margin-bottom: 7px;
-            color: var(--text-soft);
-        }
-        .field input[type="text"],
-        .field input[type="file"] {
-            width: 100%;
-            border: 1px solid var(--input-border);
-            border-radius: 10px;
-            background: var(--input-bg);
-            color: var(--text-main);
-            padding: 11px 12px;
-            font-size: 15px;
-        }
-        .save-btn {
-            border: none;
-            border-radius: 10px;
-            background: var(--accent);
-            color: #ffffff;
-            padding: 11px 16px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-        .save-btn:hover {
-            background: var(--accent-hover);
-        }
-        .message {
-            margin: 0 0 14px;
-            font-size: 14px;
-        }
-        .message.error {
-            color: var(--error);
-        }
-        .message.success {
-            color: var(--success);
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'accounts/css/theme.css' %}">
+    <link rel="stylesheet" href="{% static 'accounts/css/layout.css' %}">
+    <link rel="stylesheet" href="{% static 'accounts/css/profile.css' %}">
 </head>
-<body>
+<body class="theme-main">
     <header class="topbar">
-        <a href="{% url 'home' %}" class="logo">
-            <img src="{% static 'accounts/ml_brain.jpg' %}" alt="Logo">
-            <span>WebMaster</span>
-        </a>
+        <div class="topbar-left">
+            <div class="hamburger-menu" id="hamburger-menu">
+                <button
+                    type="button"
+                    class="hamburger-toggle"
+                    id="hamburger-toggle"
+                    aria-label="Open menu"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                >
+                    &#9776;
+                </button>
+                <div class="hamburger-dropdown" id="hamburger-dropdown" role="menu" aria-label="Navigation menu">
+                    <a href="{% url 'home' %}" class="hamburger-item" role="menuitem">Home</a>
+                    <a href="{% url 'farmer_laws' %}" class="hamburger-item" role="menuitem">Farmers Laws</a>
+                </div>
+            </div>
+            <a href="{% url 'home' %}" class="logo">
+                <img src="{% static 'accounts/ml_brain.jpg' %}" alt="Logo">
+                <span>WebMaster</span>
+            </a>
+        </div>
         <button type="button" id="theme-toggle" class="theme-btn" aria-label="Toggle theme">Theme: Light</button>
     </header>
 
-    <main class="container">
+    <main class="container page-container">
         <section class="card">
             <h1>Profile Settings</h1>
-
-            <div class="current-user">
-                <div class="avatar">
-                    {% if request.user.profile_image %}
-                    <img src="{{ request.user.profile_image.url }}" alt="Profile image">
-                    {% else %}
-                    {{ display_name|first }}
-                    {% endif %}
-                </div>
-                <div>
-                    <div class="name">{{ display_name }}</div>
-                    <div class="email">{{ request.user.email }}</div>
-                </div>
-            </div>
 
             {% if error %}
             <p class="message error">{{ error }}</p>
@@ -209,37 +49,102 @@
 
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                <div class="field">
-                    <label for="full_name">Name</label>
-                    <input id="full_name" name="full_name" type="text" value="{{ full_name }}">
+                <div class="profile-layout">
+                    <aside class="profile-sidebar">
+                        <div class="avatar-wrap">
+                            <div class="avatar">
+                                {% if request.user.profile_image %}
+                                <img src="{{ request.user.profile_image.url }}" alt="Profile image">
+                                {% else %}
+                                {{ display_name|first }}
+                                {% endif %}
+                            </div>
+                            <label for="profile_image" class="avatar-edit" title="Edit profile image">&#9998;</label>
+                        </div>
+                        <input id="profile_image" name="profile_image" type="file" accept="image/*" class="sr-only">
+
+                        <div class="field">
+                            <label for="full_name">Name</label>
+                            <input id="full_name" name="full_name" type="text" value="{{ full_name }}">
+                        </div>
+
+                        <div class="readonly-field">
+                            <span class="readonly-label">Gmail</span>
+                            <div class="readonly-value">{{ request.user.email }}</div>
+                        </div>
+
+                        <div class="field">
+                            <label for="farmer_type">Type of Farmer</label>
+                            <input id="farmer_type" name="farmer_type" type="text" value="{{ farmer_type }}" placeholder="Example: Small Farmer">
+                        </div>
+                        <div class="field">
+                            <label for="current_crop">Current Crop</label>
+                            <input id="current_crop" name="current_crop" type="text" value="{{ current_crop }}" placeholder="Example: Paddy">
+                        </div>
+                        <div class="field">
+                            <label for="plantation_date">Date of Plantation</label>
+                            <input id="plantation_date" name="plantation_date" type="date" value="{{ plantation_date }}">
+                        </div>
+                        <div class="field">
+                            <label for="crop_end_time">End Time</label>
+                            <input id="crop_end_time" name="crop_end_time" type="time" value="{{ crop_end_time }}">
+                        </div>
+                    </aside>
+
+                    <section class="profile-main">
+                        <h2 class="section-title">Land and Location Details</h2>
+                        <div class="grid-two">
+                            <div class="field">
+                                <label for="land_area_acres">Total Land (Acres)</label>
+                                <input id="land_area_acres" name="land_area_acres" type="number" min="0" step="0.01" value="{{ land_area_acres }}" placeholder="Example: 0.25">
+                                <p class="hint">Supports small holdings like 0.25 acre.</p>
+                            </div>
+                            <div class="field">
+                                <label for="soil_type">Type of Soil</label>
+                                <input id="soil_type" name="soil_type" type="text" value="{{ soil_type }}" placeholder="Example: Black cotton soil">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="passbook_image">Passbook Image</label>
+                            <input id="passbook_image" name="passbook_image" type="file" accept="image/*">
+                            <div class="passbook-preview">
+                                {% if request.user.passbook_image %}
+                                <img src="{{ request.user.passbook_image.url }}" alt="Passbook image">
+                                {% else %}
+                                <div class="passbook-dummy">Dummy passbook preview (upload image to replace)</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="grid-two">
+                            <div class="field">
+                                <label for="current_season">Current Season</label>
+                                <select id="current_season" name="current_season">
+                                    {% for season_value, season_label in season_options %}
+                                    <option value="{{ season_value }}" {% if current_season == season_value %}selected{% endif %}>{{ season_label }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="field">
+                                <label for="land_survey_numbers">Land Survey Number(s)</label>
+                                <input id="land_survey_numbers" name="land_survey_numbers" type="text" value="{{ land_survey_numbers }}" placeholder="Example: 12/A, 14/B">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label for="address">Address</label>
+                            <textarea id="address" name="address">{{ address }}</textarea>
+                        </div>
+                        <div class="save-row">
+                            <button type="submit" class="save-btn">Save Changes</button>
+                        </div>
+                    </section>
                 </div>
-                <div class="field">
-                    <label for="profile_image">Profile Image</label>
-                    <input id="profile_image" name="profile_image" type="file" accept="image/*">
-                </div>
-                <button type="submit" class="save-btn">Save Changes</button>
             </form>
         </section>
     </main>
+    <div id="google_translate_element"></div>
 
-    <script>
-    const THEME_KEY = 'auth_theme';
-    const body = document.body;
-    const themeToggle = document.getElementById('theme-toggle');
-
-    function setTheme(themeName) {
-        const isDark = themeName === 'dark';
-        body.classList.toggle('theme-dark', isDark);
-        themeToggle.textContent = isDark ? 'Theme: Dark' : 'Theme: Light';
-        localStorage.setItem(THEME_KEY, themeName);
-    }
-
-    themeToggle.addEventListener('click', function () {
-        const nextTheme = body.classList.contains('theme-dark') ? 'light' : 'dark';
-        setTheme(nextTheme);
-    });
-
-    setTheme(localStorage.getItem(THEME_KEY) || 'light');
-    </script>
+        <script src="{% static 'accounts/js/profile.js' %}"></script>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
+

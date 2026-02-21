@@ -5,233 +5,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <style>
-        :root {
-            --page-bg: #eef2f6;
-            --card-bg: #ffffff;
-            --text-main: #0f172a;
-            --text-soft: #475569;
-            --input-bg: #ffffff;
-            --input-border: #cbd5e1;
-            --accent: #2563eb;
-            --accent-hover: #1d4ed8;
-            --menu-border: #dbe4ee;
-            --avatar-bg: #dbeafe;
-            --avatar-text: #1e40af;
-        }
-        body.theme-dark {
-            --page-bg: #0f172a;
-            --card-bg: #111c31;
-            --text-main: #e2e8f0;
-            --text-soft: #9fb0c8;
-            --input-bg: #17243d;
-            --input-border: #2f4365;
-            --accent: #38bdf8;
-            --accent-hover: #22a4dd;
-            --menu-border: #2f4365;
-            --avatar-bg: #1e3a5f;
-            --avatar-text: #bcd9ff;
-        }
-        * {
-            box-sizing: border-box;
-        }
-        body {
-            margin: 0;
-            background: var(--page-bg);
-            color: var(--text-main);
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        }
-        .topbar {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-            padding: 14px 24px;
-            background: var(--card-bg);
-            border-bottom: 1px solid var(--menu-border);
-        }
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            min-width: 180px;
-        }
-        .logo-mark {
-            width: 38px;
-            height: 38px;
-            border-radius: 10px;
-            object-fit: cover;
-        }
-        .logo-text {
-            font-size: 21px;
-            font-weight: 700;
-            letter-spacing: 0.2px;
-        }
-        .search-wrap {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-        }
-        .search-form {
-            width: min(680px, 100%);
-        }
-        .search-input {
-            width: 100%;
-            padding: 11px 14px;
-            border: 1px solid var(--input-border);
-            border-radius: 10px;
-            background: var(--input-bg);
-            color: var(--text-main);
-            font-size: 15px;
-            outline: none;
-        }
-        .search-input:focus {
-            border-color: var(--accent);
-        }
-        .actions {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .theme-btn,
-        .settings-btn {
-            border: 1px solid var(--input-border);
-            border-radius: 10px;
-            background: var(--input-bg);
-            color: var(--text-main);
-            padding: 9px 12px;
-            font-size: 14px;
-            cursor: pointer;
-        }
-        .profile-chip {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 5px 8px;
-            border-radius: 999px;
-            border: 1px solid var(--input-border);
-            background: var(--input-bg);
-        }
-        .avatar {
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            overflow: hidden;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--avatar-bg);
-            color: var(--avatar-text);
-            font-weight: 700;
-            font-size: 15px;
-            text-transform: uppercase;
-        }
-        .avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .settings {
-            position: relative;
-        }
-        .settings-menu {
-            display: none;
-            position: absolute;
-            right: 0;
-            top: calc(100% + 8px);
-            width: 280px;
-            background: var(--card-bg);
-            border: 1px solid var(--menu-border);
-            border-radius: 12px;
-            box-shadow: 0 14px 28px rgba(2, 8, 23, 0.18);
-            padding: 12px;
-            z-index: 30;
-        }
-        .settings.open .settings-menu {
-            display: block;
-        }
-        .menu-profile {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 8px;
-            border-radius: 10px;
-            background: var(--input-bg);
-        }
-        .menu-name {
-            font-size: 14px;
-            font-weight: 700;
-        }
-        .menu-email {
-            font-size: 12px;
-            color: var(--text-soft);
-            margin-top: 2px;
-        }
-        .menu-link {
-            display: block;
-            margin-top: 12px;
-            width: 100%;
-            text-align: center;
-            background: var(--accent);
-            color: #ffffff;
-            text-decoration: none;
-            padding: 10px;
-            border-radius: 10px;
-            font-size: 14px;
-            font-weight: 600;
-        }
-        .menu-link:hover {
-            background: var(--accent-hover);
-        }
-        .content {
-            max-width: 980px;
-            margin: 40px auto;
-            padding: 0 24px;
-        }
-        .hero {
-            background: var(--card-bg);
-            border: 1px solid var(--menu-border);
-            border-radius: 16px;
-            padding: 30px;
-        }
-        .hero h1 {
-            margin: 0;
-            font-size: 30px;
-        }
-        .hero p {
-            margin: 10px 0 0;
-            color: var(--text-soft);
-            font-size: 16px;
-        }
-        @media (max-width: 980px) {
-            .topbar {
-                flex-wrap: wrap;
-            }
-            .logo {
-                min-width: 0;
-            }
-            .search-wrap {
-                order: 3;
-                width: 100%;
-            }
-            .actions {
-                margin-left: auto;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'accounts/css/theme.css' %}">
+    <link rel="stylesheet" href="{% static 'accounts/css/layout.css' %}">
+    <link rel="stylesheet" href="{% static 'accounts/css/home.css' %}">
 </head>
-<body>
+<body class="theme-main">
     <header class="topbar">
         <div class="logo">
+            <div class="hamburger-menu" id="hamburger-menu">
+                <button
+                    type="button"
+                    class="hamburger-toggle"
+                    id="hamburger-toggle"
+                    aria-label="Open menu"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                >
+                    &#9776;
+                </button>
+                <div class="hamburger-dropdown" id="hamburger-dropdown" role="menu" aria-label="Navigation menu">
+                    <a href="{% url 'home' %}" class="hamburger-item" role="menuitem">Home</a>
+                    <a href="{% url 'farmer_laws' %}" class="hamburger-item" role="menuitem">Farmers Laws</a>
+                </div>
+            </div>
             <img class="logo-mark" src="{% static 'accounts/ml_brain.jpg' %}" alt="Logo">
             <div class="logo-text">WebMaster</div>
         </div>
         <div class="search-wrap">
-            <form class="search-form" method="get">
-                <input class="search-input" type="text" name="q" value="{{ request.GET.q|default:'' }}" placeholder="Search">
+            <form class="search-form" id="top-search-form" method="get" autocomplete="off">
+                <div class="search-input-wrap">
+                    <input
+                        class="search-input"
+                        id="top-search-input"
+                        type="text"
+                        name="q"
+                        value="{{ request.GET.q|default:'' }}"
+                        placeholder="Search"
+                        autocomplete="off"
+                        spellcheck="false"
+                        aria-autocomplete="list"
+                        aria-controls="search-suggestions"
+                        aria-expanded="false"
+                    >
+                    <button class="search-submit" type="submit" aria-label="Search">
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="2"></circle>
+                            <line x1="16.2" y1="16.2" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+                        </svg>
+                    </button>
+                </div>
+                <ul id="search-suggestions" class="search-suggestions" role="listbox" aria-label="Search suggestions"></ul>
             </form>
         </div>
         <div class="actions">
-            <button type="button" id="theme-toggle" class="theme-btn" aria-label="Toggle theme">Theme: Light</button>
             <div class="profile-chip">
                 <div class="avatar">
                     {% if request.user.profile_image %}
@@ -242,7 +68,10 @@
                 </div>
             </div>
             <div class="settings" id="settings-wrap">
-                <button type="button" id="settings-toggle" class="settings-btn" aria-label="Settings">&#9881; Settings</button>
+                <button type="button" id="settings-toggle" class="settings-btn" aria-label="Settings">
+                    <span class="settings-icon" aria-hidden="true">&#9881;</span>
+                    <span class="settings-label">Settings</span>
+                </button>
                 <div id="settings-menu" class="settings-menu">
                     <div class="menu-profile">
                         <div class="avatar">
@@ -257,49 +86,169 @@
                             <div class="menu-email">{{ request.user.email }}</div>
                         </div>
                     </div>
+                    <div class="theme-control">
+                        <button type="button" id="theme-menu-toggle" class="menu-action" aria-haspopup="true" aria-expanded="false">
+                            Theme
+                            <span id="theme-current" class="theme-current">System Default</span>
+                        </button>
+                        <div id="theme-submenu" class="theme-submenu" role="menu" aria-label="Theme options">
+                            <button type="button" class="theme-option" data-theme-choice="light">Light</button>
+                            <button type="button" class="theme-option" data-theme-choice="dark">Dark</button>
+                            <button type="button" class="theme-option" data-theme-choice="system">System Default</button>
+                        </div>
+                    </div>
+                    <div class="language-control">
+                        <button type="button" id="language-menu-toggle" class="menu-action" aria-haspopup="true" aria-expanded="false">
+                            Language
+                            <span id="language-current" class="theme-current">English</span>
+                        </button>
+                        <div id="language-submenu" class="theme-submenu language-submenu" role="menu" aria-label="Language options">
+                            <button type="button" class="language-option" data-lang-choice="en">English</button>
+                            <button type="button" class="language-option" data-lang-choice="hi">Hindi</button>
+                            <button type="button" class="language-option" data-lang-choice="bn">Bengali</button>
+                            <button type="button" class="language-option" data-lang-choice="te">Telugu</button>
+                            <button type="button" class="language-option" data-lang-choice="mr">Marathi</button>
+                            <button type="button" class="language-option" data-lang-choice="ta">Tamil</button>
+                            <button type="button" class="language-option" data-lang-choice="ur">Urdu</button>
+                            <button type="button" class="language-option" data-lang-choice="gu">Gujarati</button>
+                            <button type="button" class="language-option" data-lang-choice="kn">Kannada</button>
+                            <button type="button" class="language-option" data-lang-choice="or">Odia</button>
+                            <button type="button" class="language-option" data-lang-choice="ml">Malayalam</button>
+                            <button type="button" class="language-option" data-lang-choice="pa">Punjabi</button>
+                            <button type="button" class="language-option" data-lang-choice="as">Assamese</button>
+                            <button type="button" class="language-option" data-lang-choice="mai">Maithili</button>
+                            <button type="button" class="language-option" data-lang-choice="sat">Santali</button>
+                            <button type="button" class="language-option" data-lang-choice="ks">Kashmiri</button>
+                            <button type="button" class="language-option" data-lang-choice="ne">Nepali</button>
+                            <button type="button" class="language-option" data-lang-choice="kok">Konkani</button>
+                            <button type="button" class="language-option" data-lang-choice="sd">Sindhi</button>
+                            <button type="button" class="language-option" data-lang-choice="doi">Dogri</button>
+                            <button type="button" class="language-option" data-lang-choice="mni">Manipuri</button>
+                        </div>
+                    </div>
                     <a class="menu-link" href="{% url 'profile' %}">Open Profile Settings</a>
+                    <a class="menu-link" href="{% url 'history' %}">History</a>
+                    <form method="post" action="{% url 'logout' %}" class="logout-form">
+                        {% csrf_token %}
+                        <button type="submit" class="logout-btn">Logout</button>
+                    </form>
                 </div>
             </div>
         </div>
     </header>
+    <div class="mobile-search-host" id="mobile-search-host"></div>
 
-    <main class="content">
-        <section class="hero">
-            <h1>Welcome, {{ display_name }}</h1>
-            <p>Use the settings button to open your profile and update your name or profile image.</p>
+    <main class="content page-container">
+        <section class="home-main" aria-label="Farmer dashboard">
+            <div class="home-main-left">
+                <section class="hero">
+                    <h1>Welcome, {{ display_name }}</h1>
+                    <p>Get farmer-focused updates, background information, and important agriculture highlights from across India.</p>
+                </section>
+                <section class="info-sections" aria-label="Farmer information panels">
+                    <div class="info-grid">
+                        <article class="info-card">
+                            <h2>History of Farmers in India</h2>
+                            <ul class="info-list">
+                                <li><strong>Ancient period:</strong> Farming in the Indus Valley and later river-basin regions built early grain, pulse, and cotton cultivation systems.</li>
+                                <li><strong>1960s Green Revolution:</strong> High-yield seeds, irrigation, and fertilizer expanded wheat and rice output and improved food security.</li>
+                                <li><strong>1980s-2000s:</strong> Many regions diversified into dairy, horticulture, oilseeds, and allied farm activities for income stability.</li>
+                                <li><strong>2010s onward:</strong> Digital advisory services, crop insurance, and direct-benefit support schemes increased farmer outreach.</li>
+                            </ul>
+                        </article>
+                        <article class="info-card">
+                            <h2>Recent Farmer Events in India</h2>
+                            <p class="card-meta">Updated with national highlights through February 2026</p>
+                            <ul class="info-list">
+                                <li><strong>01 October 2025:</strong> The Union Cabinet approved higher MSP for mandated Rabi crops for Marketing Season 2026-27.</li>
+                                <li><strong>01 October 2025:</strong> Nutrient Based Subsidy rates for Rabi 2025-26 were approved for phosphatic and potassic fertilizers.</li>
+                                <li><strong>25 November 2024:</strong> National Mission on Natural Farming was approved with a budget outlay of Rs 2,481 crore, targeting wide farmer adoption.</li>
+                                <li><strong>2023-24 to 2025-26:</strong> Namo Drone Didi rollout supports 15,000 women SHGs with drone services in agriculture.</li>
+                            </ul>
+                        </article>
+                        <article class="info-card">
+                            <h2>What Is Happening Across India</h2>
+                            <ul class="info-list">
+                                <li><strong>North India:</strong> Focus on wheat and mustard sowing cycles, irrigation scheduling, and procurement planning.</li>
+                                <li><strong>West and Central India:</strong> Continued push for pulses, oilseeds, micro-irrigation, and post-harvest market linkages.</li>
+                                <li><strong>South India:</strong> Growth in millet, horticulture, and natural-farming clusters with value-addition opportunities.</li>
+                                <li><strong>East and North-East:</strong> Strong paddy base with rising interest in diversification, flood resilience, and local agro-processing.</li>
+                            </ul>
+                        </article>
+                    </div>
+                </section>
+            </div>
+            <aside
+                class="ai-agent-card"
+                id="ai-agent-panel"
+                aria-label="AI farmer assistant"
+                data-farmer-type="{{ request.user.farmer_type|default_if_none:'' }}"
+                data-current-crop="{{ request.user.current_crop|default_if_none:'' }}"
+                data-soil-type="{{ request.user.soil_type|default_if_none:'' }}"
+                data-current-season="{{ request.user.current_season|default_if_none:'' }}"
+                data-land-area="{{ request.user.land_area_acres|default_if_none:'' }}"
+                data-address="{{ request.user.address|default_if_none:'' }}"
+            >
+                <h2>AI Farmer (Dummy)</h2>
+                <p>This is a temporary AI module. It reads your profile and gives sample recommendations until the trained model is integrated.</p>
+                <div class="ai-profile-summary">
+                    <div class="ai-profile-row">
+                        <span class="ai-profile-label">Farmer type</span>
+                        <span class="ai-profile-value">{{ request.user.farmer_type|default:"Not set" }}</span>
+                    </div>
+                    <div class="ai-profile-row">
+                        <span class="ai-profile-label">Current crop</span>
+                        <span class="ai-profile-value">{{ request.user.current_crop|default:"Not set" }}</span>
+                    </div>
+                    <div class="ai-profile-row">
+                        <span class="ai-profile-label">Soil type</span>
+                        <span class="ai-profile-value">{{ request.user.soil_type|default:"Not set" }}</span>
+                    </div>
+                    <div class="ai-profile-row">
+                        <span class="ai-profile-label">Season</span>
+                        <span class="ai-profile-value">{{ request.user.current_season|default:"Not set" }}</span>
+                    </div>
+                    <div class="ai-profile-row">
+                        <span class="ai-profile-label">Land area</span>
+                        <span class="ai-profile-value">
+                            {% if request.user.land_area_acres %}{{ request.user.land_area_acres }} acre{% else %}Not set{% endif %}
+                        </span>
+                    </div>
+                </div>
+                <div class="ai-query-wrap">
+                    <label for="ai-query" class="ai-query-label">Enter your requirement</label>
+                    <textarea id="ai-query" class="ai-query-input" placeholder="Example: I have less than 1 acre and want to improve yield this season."></textarea>
+                    <button type="button" id="run-ai-analysis" class="ai-run-btn">Analyze Farmer Details</button>
+                </div>
+                <div id="ai-output" class="ai-output">
+                    <p class="ai-output-title">Dummy AI Recommendation</p>
+                    <p class="ai-output-meta">Click "Analyze Farmer Details" to generate guidance.</p>
+                </div>
+            </aside>
         </section>
     </main>
+    <footer class="site-footer">
+        <div class="footer-block footer-left"></div>
+        <div class="footer-block">
+            <h3>Support</h3>
+            <a class="footer-support-link" href="mailto:FarmersHelpAi@gmail.com">FarmersHelpAi@gmail.com</a>
+        </div>
+        <div class="footer-block">
+            <h3>Terms and Conditions</h3>
+            <p>AI answers are for guidance only and may not always be accurate. Verify important farming decisions with trusted local experts before taking action.</p>
+        </div>
+    </footer>
+    <div class="agent-launcher" id="agent-launcher">
+        <div class="agent-popup" id="agent-popup" role="dialog" aria-label="AI farmer launcher" aria-hidden="true">
+            <p>Open Farmer to continue.</p>
+            <button type="button" class="agent-open-btn" id="agent-open-tab" data-agent-url="{% url 'agent_dummy' %}">Open Farmer</button>
+        </div>
+        <button type="button" class="agent-fab" id="agent-fab" aria-haspopup="dialog" aria-controls="agent-popup" aria-expanded="false">Farmer</button>
+    </div>
+    <div id="google_translate_element"></div>
 
-    <script>
-    const THEME_KEY = 'auth_theme';
-    const body = document.body;
-    const themeToggle = document.getElementById('theme-toggle');
-    const settingsWrap = document.getElementById('settings-wrap');
-    const settingsToggle = document.getElementById('settings-toggle');
-
-    function setTheme(themeName) {
-        const isDark = themeName === 'dark';
-        body.classList.toggle('theme-dark', isDark);
-        themeToggle.textContent = isDark ? 'Theme: Dark' : 'Theme: Light';
-        localStorage.setItem(THEME_KEY, themeName);
-    }
-
-    themeToggle.addEventListener('click', function () {
-        const nextTheme = body.classList.contains('theme-dark') ? 'light' : 'dark';
-        setTheme(nextTheme);
-    });
-
-    settingsToggle.addEventListener('click', function () {
-        settingsWrap.classList.toggle('open');
-    });
-
-    document.addEventListener('click', function (event) {
-        if (!settingsWrap.contains(event.target)) {
-            settingsWrap.classList.remove('open');
-        }
-    });
-
-    setTheme(localStorage.getItem(THEME_KEY) || 'light');
-    </script>
+        <script src="{% static 'accounts/js/home.js' %}"></script>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
+

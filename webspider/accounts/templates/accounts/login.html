@@ -5,175 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <style>
-        :root {
-            --page-bg: #f2f2f2;
-            --panel-bg: #f2f2f2;
-            --text-color: #111111;
-            --input-bg: #ffffff;
-            --input-border: #cfd4db;
-            --input-text: #111111;
-            --btn-bg: #007bff;
-            --btn-bg-hover: #0069d9;
-            --btn-text: #ffffff;
-            --link-color: #007bff;
-            --switch-bg: rgba(255, 255, 255, 0.9);
-            --switch-border: #d8dde4;
-            --switch-icon: #4b5563;
-            --switch-active-bg: #007bff;
-            --switch-active-icon: #ffffff;
-        }
-        body.theme-dark {
-            --page-bg: #141a23;
-            --panel-bg: #141a23;
-            --text-color: #e7edf7;
-            --input-bg: #1f2a3a;
-            --input-border: #334155;
-            --input-text: #e7edf7;
-            --btn-bg: #1d9bf0;
-            --btn-bg-hover: #1788d6;
-            --btn-text: #ffffff;
-            --link-color: #6ec1ff;
-            --switch-bg: rgba(25, 33, 46, 0.95);
-            --switch-border: #2e3a4e;
-            --switch-icon: #b8c7da;
-            --switch-active-bg: #1d9bf0;
-            --switch-active-icon: #ffffff;
-        }
-        body, html {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            background: var(--page-bg);
-            color: var(--text-color);
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        }
-        .theme-switch {
-            position: fixed;
-            top: 16px;
-            right: 16px;
-            z-index: 20;
-            display: flex;
-            gap: 8px;
-            padding: 6px;
-            border: 1px solid var(--switch-border);
-            border-radius: 999px;
-            background: var(--switch-bg);
-            backdrop-filter: blur(4px);
-        }
-        .theme-btn {
-            width: 38px;
-            height: 38px;
-            border: none;
-            border-radius: 50%;
-            background: transparent;
-            color: var(--switch-icon);
-            font-size: 18px;
-            line-height: 1;
-            cursor: pointer;
-            transition: background 0.2s ease, color 0.2s ease;
-        }
-        .theme-btn.active {
-            background: var(--switch-active-bg);
-            color: var(--switch-active-icon);
-        }
-        .container {
-            display: flex;
-            height: 100vh;
-        }
-        .left {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: var(--panel-bg);
-            box-shadow: 2px 0 8px rgba(0,0,0,0.03);
-        }
-        .right {
-            flex: 1;
-            background: var(--panel-bg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .right img {
-            max-width: 90%;
-            max-height: 90%;
-            object-fit: contain;
-            border-radius: 16px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-        }
-        .login-form {
-            width: 300px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        .login-form input {
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid var(--input-border);
-            border-radius: 6px;
-            background: var(--input-bg);
-            color: var(--input-text);
-        }
-        .login-form button {
-            padding: 10px;
-            background: var(--btn-bg);
-            color: var(--btn-text);
-            border: none;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 6px;
-            transition: background 0.2s ease;
-        }
-        .login-form button:hover {
-            background: var(--btn-bg-hover);
-        }
-        .form-error {
-            color: #dc2626;
-            text-align: center;
-        }
-        .form-note {
-            text-align: center;
-            font-size: 14px;
-        }
-        .form-note a {
-            color: var(--link-color);
-            text-decoration: none;
-        }
-        @media (max-width: 900px) {
-            .container {
-                flex-direction: column;
-            }
-            .right {
-                min-height: 280px;
-            }
-            .left, .right {
-                flex: initial;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'accounts/css/theme.css' %}">
+    <link rel="stylesheet" href="{% static 'accounts/css/login.css' %}">
 </head>
-<body>
+<body class="theme-auth">
     <div class="theme-switch" role="group" aria-label="Theme switch">
         <button type="button" class="theme-btn" data-theme="light" title="Light theme" aria-label="Light theme">&#9728;</button>
         <button type="button" class="theme-btn" data-theme="dark" title="Dark theme" aria-label="Dark theme">&#127769;</button>
     </div>
     <div class="container">
         <div class="left">
-            <form class="login-form" method="post" autocomplete="off">
+            <form class="login-form" method="post" autocomplete="on">
                 {% csrf_token %}
                 <h2 style="text-align:center; margin-bottom:10px;">Login</h2>
                 {% if error %}
                 <div class="form-error">{{ error }}</div>
                 {% endif %}
-                <input type="text" id="username" name="username" placeholder="Gmail or Phone Number" required autofocus oninput="handleInput()">
+                <input type="text" id="username" name="username" placeholder="Gmail or Phone Number" required autofocus oninput="handleInput()" autocomplete="username" autocapitalize="off" spellcheck="false">
+                <div id="gmail-suggestion" class="gmail-suggestion" role="button" tabindex="0"></div>
                 <div id="country-code-div" style="display:none;">
                     <input type="text" id="country_code" name="country_code" placeholder="Country Code (e.g. +1)" maxlength="5">
                 </div>
-                <input type="password" name="password" placeholder="Password" required>
+                <input type="password" name="password" placeholder="Password" required autocomplete="current-password">
                 <button type="submit">Login</button>
                 <div class="form-note">
                     Don't have an account?
@@ -185,38 +38,9 @@
             <img src="{% static 'accounts/ml_brain.jpg' %}" alt="Machine Learning Logo">
         </div>
     </div>
-    <script>
-    const THEME_KEY = 'auth_theme';
-    const themeButtons = document.querySelectorAll('.theme-btn');
-
-    function setTheme(themeName) {
-        const isDark = themeName === 'dark';
-        document.body.classList.toggle('theme-dark', isDark);
-        themeButtons.forEach(function (button) {
-            button.classList.toggle('active', button.dataset.theme === themeName);
-        });
-        localStorage.setItem(THEME_KEY, themeName);
-    }
-
-    themeButtons.forEach(function (button) {
-        button.addEventListener('click', function () {
-            setTheme(button.dataset.theme);
-        });
-    });
-
-    setTheme(localStorage.getItem(THEME_KEY) || 'light');
-
-    function handleInput() {
-        var val = document.getElementById('username').value;
-        var ccDiv = document.getElementById('country-code-div');
-        if (/^\d{7,}$/.test(val)) {
-            ccDiv.style.display = 'block';
-            document.getElementById('country_code').required = true;
-        } else {
-            ccDiv.style.display = 'none';
-            document.getElementById('country_code').required = false;
-        }
-    }
-    </script>
+    <div id="google_translate_element"></div>
+        <script src="{% static 'accounts/js/login.js' %}"></script>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
+

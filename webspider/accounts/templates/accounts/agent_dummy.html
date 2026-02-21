@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer</title>
+    <link rel="stylesheet" href="{% static 'accounts/css/theme.css' %}">
+    <link rel="stylesheet" href="{% static 'accounts/css/agent_dummy.css' %}">
+</head>
+<body class="theme-main">
+    <main class="card" aria-label="Farmer placeholder">
+        <img class="logo" src="{% static 'accounts/ml_brain.jpg' %}" alt="Farmer logo">
+        <h1>Hi {{ display_name }}</h1>
+        <p>AI Farmer module is still in dummy mode.</p>
+        <p class="message">broo we are working on it</p>
+        <a href="{% url 'home' %}" class="back-link">Back to Home</a>
+    </main>
+        <script src="{% static 'accounts/js/agent_dummy.js' %}"></script>
+</body>
+</html>
+

@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Laws Reference</title>
+    <link rel="stylesheet" href="{% static 'accounts/css/theme.css' %}">
+    <link rel="stylesheet" href="{% static 'accounts/css/layout.css' %}">
+    <link rel="stylesheet" href="{% static 'accounts/css/laws.css' %}">
+</head>
+<body class="theme-main">
+    <header class="topbar">
+        <div class="topbar-left">
+            <div class="hamburger-menu" id="hamburger-menu">
+                <button
+                    type="button"
+                    class="hamburger-toggle"
+                    id="hamburger-toggle"
+                    aria-label="Open menu"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                >
+                    &#9776;
+                </button>
+                <div class="hamburger-dropdown" id="hamburger-dropdown" role="menu" aria-label="Navigation menu">
+                    <a href="{% url 'home' %}" class="hamburger-item" role="menuitem">Home</a>
+                    <a href="{% url 'farmer_laws' %}" class="hamburger-item" role="menuitem">Farmers Laws</a>
+                </div>
+            </div>
+            <a href="{% url 'home' %}" class="logo">
+                <img src="{% static 'accounts/ml_brain.jpg' %}" alt="Logo">
+                <span>WebMaster</span>
+            </a>
+        </div>
+        <button type="button" id="theme-toggle" class="theme-btn" aria-label="Toggle theme">Theme: Light</button>
+    </header>
+
+    <main class="container page-container" id="laws-container" data-selected-state="{{ selected_state|lower|escapejs }}">
+        <section class="card">
+            <h1>Farmer and Agriculture Laws</h1>
+            <p class="subtitle">
+                {{ display_name }}, use this reference list to quickly find major laws and judicial references relevant to agriculture.
+                Search by law name, category, year, or judicial number. This list is for guidance; verify latest updates before legal use.
+            </p>
+
+            <div class="law-filters">
+                <div>
+                    <label for="state-filter" class="state-filter-label">Select State / UT</label>
+                    <select id="state-filter" class="state-filter-select">
+                        <option value="">Select State / UT</option>
+                        {% for state_name in states %}
+                        <option value="{{ state_name|lower }}" {% if selected_state == state_name %}selected{% endif %}>{{ state_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label for="law-search" class="law-search-label">Search laws by name or judicial number</label>
+                    <input
+                        type="text"
+                        id="law-search"
+                        class="law-search-input"
+                        placeholder="Example: Act 53 of 2001, Seeds Act, land acquisition"
+                        autocomplete="off"
+                    >
+                </div>
+            </div>
+            <p class="results-meta" id="results-meta"></p>
+
+            <div class="laws-list" id="laws-list">
+                {% for law in laws %}
+                <article
+                    class="law-item"
+                    data-search="{{ law.title|lower }} {{ law.judicial_number|lower }} {{ law.category|lower }} {{ law.status|lower }} {{ law.year|lower }} {{ law.scope|lower }} {{ law.states|join:' '|lower }}"
+                    data-states="{% for law_state in law.states %}{{ law_state|lower }}{% if not forloop.last %}|{% endif %}{% endfor %}"
+                >
+                    <div>
+                        <h2 class="law-title">{{ law.title }} ({{ law.year }})</h2>
+                        <p class="law-detail"><strong>Judicial Number:</strong> {{ law.judicial_number }}</p>
+                        <p class="law-detail"><strong>Scope:</strong> {{ law.scope }}</p>
+                        <p class="law-detail"><strong>Applicable State(s):</strong> {{ law.states|join:", " }}</p>
+                        <p class="law-detail"><strong>Category:</strong> {{ law.category }}</p>
+                        <p class="law-detail"><strong>Status:</strong> {{ law.status }}</p>
+                    </div>
+                    <a class="open-law-link" href="{{ law.reference_url }}" target="_blank" rel="noopener noreferrer">Open Law in New Tab</a>
+                </article>
+                {% endfor %}
+            </div>
+
+            <p class="no-results" id="no-results" hidden>No law matched your state and search criteria.</p>
+        </section>
+    </main>
+    <div id="google_translate_element"></div>
+
+        <script src="{% static 'accounts/js/laws.js' %}"></script>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>
+

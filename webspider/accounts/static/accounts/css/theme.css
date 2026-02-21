@@ -1,0 +1,80 @@
+:root {
+    --font-sans: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body.theme-main {
+    --page-bg: #ececec;
+    --card-bg: #ffffff;
+    --text-main: #171717;
+    --text-soft: #616161;
+    --input-bg: #f7f7f7;
+    --input-border: #cccccc;
+    --accent: #6b7280;
+    --accent-hover: #4b5563;
+    --menu-border: #d4d4d4;
+    --avatar-bg: #dcdcdc;
+    --avatar-text: #1f2937;
+    --error: #dc2626;
+    --success: #166534;
+    --border: #d4d4d4;
+}
+
+body.theme-main.theme-dark {
+    --page-bg: #090909;
+    --card-bg: #161616;
+    --text-main: #f3f4f6;
+    --text-soft: #a3a3a3;
+    --input-bg: #202020;
+    --input-border: #3f3f46;
+    --accent: #9ca3af;
+    --accent-hover: #c4c8cf;
+    --menu-border: #323232;
+    --avatar-bg: #2a2a2a;
+    --avatar-text: #f3f4f6;
+    --error: #f87171;
+    --success: #86efac;
+    --border: #323232;
+}
+
+body.theme-auth {
+    --page-bg: #f2f2f2;
+    --panel-bg: #f2f2f2;
+    --text-color: #111111;
+    --input-bg: #ffffff;
+    --input-border: #cfd4db;
+    --input-text: #111111;
+    --btn-bg: #007bff;
+    --btn-bg-hover: #0069d9;
+    --btn-text: #ffffff;
+    --link-color: #007bff;
+    --switch-bg: rgba(255, 255, 255, 0.9);
+    --switch-border: #d8dde4;
+    --switch-icon: #4b5563;
+    --switch-active-bg: #007bff;
+    --switch-active-icon: #ffffff;
+}
+
+body.theme-auth.theme-dark {
+    --page-bg: #141a23;
+    --panel-bg: #141a23;
+    --text-color: #e7edf7;
+    --input-bg: #1f2a3a;
+    --input-border: #334155;
+    --input-text: #e7edf7;
+    --btn-bg: #1d9bf0;
+    --btn-bg-hover: #1788d6;
+    --btn-text: #ffffff;
+    --link-color: #6ec1ff;
+    --switch-bg: rgba(25, 33, 46, 0.95);
+    --switch-border: #2e3a4e;
+    --switch-icon: #b8c7da;
+    --switch-active-bg: #1d9bf0;
+    --switch-active-icon: #ffffff;
+}
+
+body {
+    margin: 0;
+    background: var(--page-bg);
+    color: var(--text-main, var(--text-color, #111111));
+    font-family: var(--font-sans);
+}
